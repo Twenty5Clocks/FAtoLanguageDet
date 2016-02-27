@@ -14,6 +14,7 @@
 using namespace std;
 int main()
 {
+	cout << "This is working!!!" << endl;
 	system("pause");
 	return 0;
 }
