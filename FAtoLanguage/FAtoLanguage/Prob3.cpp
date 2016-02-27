@@ -15,6 +15,7 @@ using namespace std;
 int main()
 {
 	cout << "This is working!!!" << endl;
+	cout << "New Line." << endl;
 	system("pause");
 	return 0;
 }
