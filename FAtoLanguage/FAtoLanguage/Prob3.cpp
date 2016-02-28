@@ -7,16 +7,65 @@
 //          Professor	Ray Ahmadnia
 //
 // This program displays:
-//       Evaluate postfix expressions with multiple letter variables
+//       Check if words in a file are included in the language L = aa*b + bb*
 //------------------------------------------------------------------------------------------
 #include <iostream>
+#include <string>
+#include <fstream>
 
 using namespace std;
 int main()
 {
-	cout << "This is working!!!" << endl;
-	cout << "New Line." << endl;
-	cout << "adding yet another line" << endl;
+	//table of the language
+	//the starting state is 1
+	int table[5][3] = { 0,0,0,
+		2,4,0,
+		2,3,0,
+		0,0,0,
+		0,4,0 };
+	//w will hold the string of the individual words to check
+	string w;
+	fstream inp;
+	//open the file that includes the strings to check
+	inp.open("data.txt", ios::in);
+	//get the first word in the file
+	getline(inp,w);
+	//loop through the words in the text file
+	while (!inp.eof())
+	{
+		//initialize values		
+		int i = 0, col, state = 1;
+		//will loop through the letters in the word until it encounters a '$'
+		while (w[i] != '$')
+		{
+			//print the word letter by letter to prevent printing the '$' at the end
+			cout << w[i];
+			switch (w[i])
+			{
+			case 'a':col = 0; break;
+			case 'b':col = 1; break;
+			case 'c':col = 2; break;
+			}
+			//move to the new state
+			state = table[state][col];
+			i++;
+		}
+		//output the result to the user
+		if (state == 0)
+			cout << " is not accepted\n";
+		else
+			cout << " is accepted\n";
+		//get the next word
+		getline(inp, w);
+	}
+	//close the file stream
+	inp.close();
+	//terminate the program
 	system("pause");
 	return 0;
 }
+/*-----------------output---------------------
+aaab is accepted
+bcbbca is not accepted
+Press any key to continue . . .
+---------------------------------------------*/
