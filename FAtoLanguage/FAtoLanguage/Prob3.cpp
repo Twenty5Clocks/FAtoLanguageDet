@@ -14,15 +14,12 @@
 #include <fstream>
 
 using namespace std;
+
 int main()
 {
 	//table of the language
 	//the starting state is 1
-	int table[5][3] = { 0,0,0,
-		2,4,0,
-		2,3,0,
-		0,0,0,
-		0,4,0 };
+	int table[5][3] = { {1,3,4}, {1,2,4}, {4,4,4}, {4,3,4}, {4,4,4} };
 	//w will hold the string of the individual words to check
 	string w;
 	fstream inp;
@@ -34,7 +31,7 @@ int main()
 	while (!inp.eof())
 	{
 		//initialize values		
-		int i = 0, col, state = 1;
+		int i = 0, col, state = 0;
 		//will loop through the letters in the word until it encounters a '$'
 		while (w[i] != '$')
 		{
@@ -51,7 +48,7 @@ int main()
 			i++;
 		}
 		//output the result to the user
-		if (state == 0)
+		if (state == 4)
 			cout << " is not accepted\n";
 		else
 			cout << " is accepted\n";
