@@ -8,6 +8,14 @@
 //
 // This program displays:
 //       Check if words in a file are included in the language L = aa*b + bb*
+/*				c always goes to the non-inclusion state
+	a	b	c
+0	1	3	4
+1	1	2	4
+2	4	4	4
+3	4	3	4
+4	4	4	4
+*/
 //------------------------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -18,7 +26,7 @@ using namespace std;
 int main()
 {
 	//table of the language
-	//the starting state is 1
+	//the starting state is 0
 	int table[5][3] = { {1,3,4}, {1,2,4}, {4,4,4}, {4,3,4}, {4,4,4} };
 	//w will hold the string of the individual words to check
 	string w;
