@@ -8,7 +8,7 @@
 //
 // This program displays:
 //       Check if words in a file are included in the language L = aa*b + bb*
-/*				c always goes to the non-inclusion state
+/*				c/any other letter always goes to the non-inclusion state
 	a	b	c
 0	1	3	4
 1	1	2	4
