@@ -49,7 +49,7 @@ int main()
 			{
 			case 'a':col = 0; break;
 			case 'b':col = 1; break;
-			case 'c':col = 2; break;
+			default:col = 2;		//is used for any letter not in the lanuage
 			}
 			//move to the new state
 			state = table[state][col];
