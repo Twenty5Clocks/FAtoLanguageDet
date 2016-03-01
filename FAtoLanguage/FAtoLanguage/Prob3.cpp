@@ -9,43 +9,58 @@
 // This program displays:
 //       Check if words in a file are included in the language L = aa*b + bb*
 //------------------------------------------------------------------------------------------
-/*
-Given L write a program to determine whether the word w is accepted or rejected by L.
-L = a*b*+c*
-Create a complete FA then find table
-a	b	c
-0	3	4	1
-1	2	2	1
-2	2	2	2
-3	3	4	2
-4	2	4	2
-*/
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
-
-int main() {
-	//Array containg table:
-	int Table[5][3] = { { 3,4,1 },{ 2,2,1 },{ 2,2,2 },{ 3,4,2 },{ 2,4,2 } };
-
-	string w = "aabbb";
-	int i = 0, col, state = 0;
-	while (i < w.length()) {
-		switch (w[i]) {
-		case 'a':
-			col = 0; break;
-		case 'b':
-			col = 1; break;
-		case 'c':
-			col = 2; break;
+int main()
+{
+	//table of the language
+	//the starting state is 1
+	int table[5][3] = { 0,0,0,
+		2,4,0,
+		2,3,0,
+		0,0,0,
+		0,4,0 };
+	//w will hold the string of the individual words to check
+	string w;
+	fstream inp;
+	//open the file that includes the strings to check
+	inp.open("data.txt", ios::in);
+	//get the first word in the file
+	getline(inp, w);
+	//loop through the words in the text file
+	while (!inp.eof())
+	{
+		//initialize values		
+		int i = 0, col, state = 1;
+		//will loop through the letters in the word until it encounters a '$'
+		while (w[i] != '$')
+		{
+			//print the word letter by letter to prevent printing the '$' at the end
+			cout << w[i];
+			switch (w[i])
+			{
+			case 'a':col = 0; break;
+			case 'b':col = 1; break;
+			case 'c':col = 2; break;
+			}
+			//move to the new state
+			state = table[state][col];
+			i++;
 		}
-		state = Table[state][col];
-
-		i++;
+		//output the result to the user
+		if (state == 0)
+			cout << " is not accepted\n";
+		else
+			cout << " is accepted\n";
+		//get the next word
+		getline(inp, w);
 	}
-	if (state == 2) cout << w << "is rejected";
-	else cout << w << "is accepted";
+	//close the file stream
+	inp.close();
+	//terminate the program
 	system("pause");
 	return 0;
 }
